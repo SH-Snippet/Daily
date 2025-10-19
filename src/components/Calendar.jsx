@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Calendar.css';
 
-function Calendar({ onDateClick, snippets, schedules }) {
+function Calendar({ onDateClick, snippets, schedules, tomorrowPlans }) {
   const [currentDate, setCurrentDate] = useState(new Date(2025, 9, 1)); // October 2025
   const [viewMode, setViewMode] = useState('snippet'); // 'snippet' or 'schedule'
 

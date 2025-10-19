@@ -78,9 +78,14 @@ function TeamSnippetView({ date, teamSnippets, currentUser, onClose, onWriteSnip
                       <span className="user-role">{displayedSnippet.userRole}</span>
                     </div>
                   </div>
-                  {displayedSnippet.score && (
-                    <div className="snippet-score">
-                      <span className="score-badge">{displayedSnippet.score} 점</span>
+                  {/* USR-002: AI 점수 표시 */}
+                  {displayedSnippet.aiScore && (
+                    <div className="ai-score-display">
+                      <div className="score-badge">
+                        <span className="score-icon">🤖</span>
+                        <span className="score-number">{displayedSnippet.aiScore.total}</span>
+                        <span className="score-max">/100</span>
+                      </div>
                     </div>
                   )}
                 </div>
@@ -92,6 +97,42 @@ function TeamSnippetView({ date, teamSnippets, currentUser, onClose, onWriteSnip
                       <p key={i}>{line}</p>
                     ))}
                   </div>
+                  
+                  {/* USR-002: AI 코멘트 표시 */}
+                  {displayedSnippet.aiScore?.comments && (
+                    <div className="ai-comments-section">
+                      <h4>🤖 AI 피드백</h4>
+                      <div className="ai-comments">
+                        {displayedSnippet.aiScore.comments.map((comment, idx) => (
+                          <p key={idx} className="ai-comment">{comment}</p>
+                        ))}
+                      </div>
+                      {displayedSnippet.aiScore.breakdown && (
+                        <div className="score-breakdown-detail">
+                          <div className="breakdown-item">
+                            <span className="breakdown-label">What</span>
+                            <span className="breakdown-value">{displayedSnippet.aiScore.breakdown.what}/20</span>
+                          </div>
+                          <div className="breakdown-item">
+                            <span className="breakdown-label">Why</span>
+                            <span className="breakdown-value">{displayedSnippet.aiScore.breakdown.why}/25</span>
+                          </div>
+                          <div className="breakdown-item">
+                            <span className="breakdown-label">Highlight</span>
+                            <span className="breakdown-value">{displayedSnippet.aiScore.breakdown.highlight}/20</span>
+                          </div>
+                          <div className="breakdown-item">
+                            <span className="breakdown-label">Lowlight</span>
+                            <span className="breakdown-value">{displayedSnippet.aiScore.breakdown.lowlight}/15</span>
+                          </div>
+                          <div className="breakdown-item">
+                            <span className="breakdown-label">Tomorrow</span>
+                            <span className="breakdown-value">{displayedSnippet.aiScore.breakdown.tomorrow}/20</span>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  )}
                   
                   {displayedSnippet.tags && displayedSnippet.tags.length > 0 && (
                     <div className="snippet-tags">
@@ -155,8 +196,11 @@ function TeamSnippetView({ date, teamSnippets, currentUser, onClose, onWriteSnip
                     <div className="teammate-info">
                       <div className="teammate-name-row">
                         <span className="teammate-name">{snippet.userName}</span>
-                        {snippet.score && (
-                          <span className="teammate-score">{snippet.score}점</span>
+                        {snippet.aiScore?.total && (
+                          <span className="teammate-score">
+                            <span className="score-icon">🤖</span>
+                            {snippet.aiScore.total}점
+                          </span>
                         )}
                       </div>
                       <span className="teammate-preview">

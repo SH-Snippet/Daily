@@ -21,6 +21,36 @@
   flex-shrink: 0;
 }
 
+/* INT-003: AI 챗봇 플로팅 버튼 */
+.chatbot-fab {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  padding: 16px 24px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 30px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
+  transition: all 0.3s;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.chatbot-fab:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(102, 126, 234, 0.5);
+}
+
+.chatbot-fab:active {
+  transform: translateY(-2px);
+}
+
 @media (max-width: 1024px) {
   .main-content {
     flex-direction: column;
@@ -28,5 +58,12 @@
 
   .leaderboard-section {
     width: 100%;
+  }
+
+  .chatbot-fab {
+    bottom: 20px;
+    right: 20px;
+    padding: 14px 20px;
+    font-size: 0.9rem;
   }
 }

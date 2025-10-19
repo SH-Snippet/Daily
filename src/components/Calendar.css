@@ -233,6 +233,29 @@
   color: #667eea;
 }
 
+/* INT-002: Tomorrow 표시 */
+.tomorrow-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 4px 8px;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(5, 150, 105, 0.1) 100%);
+  border-radius: 12px;
+  font-size: 12px;
+}
+
+.tomorrow-icon {
+  font-size: 14px;
+  line-height: 1;
+}
+
+.tomorrow-count {
+  font-size: 11px;
+  font-weight: 700;
+  color: #10b981;
+}
+
 @media (max-width: 768px) {
   .calendar {
     padding: 16px;

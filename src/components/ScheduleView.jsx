@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './ScheduleView.css';
 
-function ScheduleView({ selectedDate, schedules, onClose, onDelete, onEdit, onAdd, teamSchedules = [] }) {
+function ScheduleView({ selectedDate, schedules, onClose, onDelete, onEdit, onAdd, teamSchedules = [], tomorrowPlans = [] }) {
   const [selectedTeammate, setSelectedTeammate] = useState(null);
 
   // 시간 겹침 체크 함수
@@ -110,6 +110,12 @@ function ScheduleView({ selectedDate, schedules, onClose, onDelete, onEdit, onAd
   const displaySchedules = selectedTeammate ? teammateSchedules : mySchedule;
   const displayUser = selectedTeammate ? selectedTeammate : null;
 
+  // INT-002: 내일 날짜 계산 및 Tomorrow 계획 필터링
+  const tomorrow = new Date(selectedDate);
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  const tomorrowDateStr = tomorrow.toISOString().split('T')[0];
+  const tomorrowSchedules = tomorrowPlans.filter(plan => plan.date === tomorrowDateStr);
+
   return (
     <div className="schedule-view-overlay" onClick={onClose}>
       <div className="schedule-view-container" onClick={(e) => e.stopPropagation()}>
@@ -205,6 +211,37 @@ function ScheduleView({ selectedDate, schedules, onClose, onDelete, onEdit, onAd
               </div>
             )}
           </div>
+
+          {/* INT-002: 내일(Tomorrow) 계획 섹션 */}
+          {!selectedTeammate && tomorrowSchedules.length > 0 && (
+            <div className="tomorrow-plans-section">
+              <h3 className="tomorrow-title">
+                <span className="tomorrow-icon">📝</span>
+                내일 할 일 ({tomorrowDateStr})
+              </h3>
+              <div className="tomorrow-plans-list">
+                {tomorrowSchedules.map((plan, index) => (
+                  <div key={index} className="tomorrow-plan-item">
+                    <div className="plan-checkbox">
+                      <input type="checkbox" id={`plan-${index}`} />
+                      <label htmlFor={`plan-${index}`}></label>
+                    </div>
+                    <div className="plan-content">
+                      <p className="plan-text">{plan.content}</p>
+                      {plan.category && (
+                        <span className={`plan-category ${plan.category}`}>
+                          {plan.category === 'work' && '업무'}
+                          {plan.category === 'meeting' && '회의'}
+                          {plan.category === 'personal' && '개인'}
+                          {plan.category === 'study' && '학습'}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
 
           <div className="teammates-section">
             <h3>팀원 일정</h3>
