@@ -68,7 +68,7 @@
   align-items: center;
   gap: 8px;
   padding: 8px 16px;
-  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  background: #ff6b35;
   color: white;
   border-radius: 20px;
   font-size: 16px;
@@ -432,25 +432,26 @@
   justify-content: center;
   width: 70px;
   height: 70px;
-  background: white;
+  background: #ff6b35;
   border-radius: 50%;
   border: 3px solid #ff6b35;
   flex-shrink: 0;
 }
 
 .score-circle.health {
-  border-color: #f7931e;
+  background: #ff6b35;
+  border-color: #ff6b35;
 }
 
 .score-number {
   font-size: 24px;
   font-weight: 700;
-  color: #ff6b35;
+  color: #ffffff;
   line-height: 1;
 }
 
 .score-circle.health .score-number {
-  color: #f7931e;
+  color: #ffffff;
 }
 
 .score-total {

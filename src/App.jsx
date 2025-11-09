@@ -396,7 +396,10 @@ API 엔드포인트 5개 구현
       title: snippetTypeLabels[snippetData.snippetType || 'daily'],
       content: snippetData.content,
       tags: [],
-      score: existingSnippet?.score || 0,
+      // preserve legacy score if available, otherwise use aiScore.total when present
+      score: snippetData.aiScore?.total ?? existingSnippet?.score ?? 0,
+      aiScore: snippetData.aiScore || existingSnippet?.aiScore || null,
+      healthScore: typeof snippetData.healthScore === 'object' ? (snippetData.healthScore?.total || 0) : (snippetData.healthScore ?? existingSnippet?.healthScore ?? 0),
       likes: existingSnippet?.likes || 0,
       likedBy: existingSnippet?.likedBy || []
     };
@@ -414,9 +417,10 @@ API 엔드포인트 5개 구현
       [date]: existingSnippets
     });
 
+    // snippets state used by Calendar expects an array of snippets for the date
     setSnippets({
       ...snippets,
-      [date]: snippetData
+      [date]: existingSnippets
     });
   };
 

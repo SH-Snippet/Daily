@@ -102,12 +102,10 @@ function TeamSnippetView({ date, teamSnippets, currentUser, onClose, onWriteSnip
                 </div>
                 
                 <div className="snippet-body">
-                  {displayedSnippet.title && (
+                      {displayedSnippet.title && (
                     <div className="snippet-title-row">
                       <h3 className="snippet-title">{displayedSnippet.title}</h3>
-                      {displayedSnippet.healthScore && (
-                        <span className="health-badge">💪 {displayedSnippet.healthScore}</span>
-                      )}
+                      <span className="health-badge">💪 {typeof displayedSnippet.healthScore === 'object' ? (displayedSnippet.healthScore?.total ?? 0) : (displayedSnippet.healthScore ?? 0)}</span>
                     </div>
                   )}
                   <div className="snippet-content">
@@ -215,17 +213,13 @@ function TeamSnippetView({ date, teamSnippets, currentUser, onClose, onWriteSnip
                       <div className="teammate-name-row">
                         <span className="teammate-name">{snippet.userName}</span>
                         <div className="teammate-scores">
-                          {snippet.aiScore?.total && (
                             <span className="teammate-score ai">
-                              {snippet.aiScore.total}점
+                              {snippet.aiScore?.total ?? snippet.aiScore ?? 0}점
                             </span>
-                          )}
-                          {snippet.healthScore && (
                             <span className="teammate-score health">
-                              💪 {snippet.healthScore}
+                              {typeof snippet.healthScore === 'object' ? (snippet.healthScore?.total ?? 0) : (snippet.healthScore ?? 0)}
                             </span>
-                          )}
-                        </div>
+                          </div>
                       </div>
                       <span className="teammate-preview">
                         {snippet.title || snippet.content.substring(0, 30) + '...'}

@@ -193,12 +193,14 @@
   align-items: center;
   gap: 6px;
   background: #ff6b35;
-  color: #fff;
-  padding: 8px 16px;
+  color: #ffffff;
+  padding: 12px 24px;
   border-radius: 20px;
   font-size: 14px;
   font-weight: 700;
-  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.4);
+  min-width: 90px;
+  justify-content: center;
 }
 
 .score-badge.health {
@@ -214,12 +216,14 @@
 .score-number {
   font-size: 20px;
   line-height: 1;
+  color: #ffffff;
 }
 
 .score-max {
   font-size: 12px;
-  opacity: 0.8;
+  opacity: 0.9;
   line-height: 1;
+  color: #ffffff;
 }
 
 /* AI 코멘???�션 */
@@ -518,15 +522,15 @@
 }
 
 .teammate-score.ai {
-  color: #ff6b35;
-  background: rgba(255, 107, 53, 0.1);
-  border-color: #ff6b35;
+  color: #ffffff;
+  background: #ff6b35;
+  border-color: transparent;
 }
 
 .teammate-score.health {
-  color: #f7931e;
-  background: rgba(247, 147, 30, 0.1);
-  border-color: #f7931e;
+  color: #ffffff;
+  background: #ff6b35;
+  border-color: transparent;
 }
 
 .teammate-score .score-icon {

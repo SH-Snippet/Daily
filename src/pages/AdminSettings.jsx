@@ -244,7 +244,7 @@ function AdminSettings({ onClose }) {
                   className="weight-fill" 
                   style={{ 
                     width: `${getTotalWeight()}%`,
-                    backgroundColor: getTotalWeight() === 100 ? '#10b981' : '#f59e0b'
+                    backgroundColor: getTotalWeight() === 100 ? '#ff6b35' : '#f59e0b'
                   }}
                 />
               </div>
@@ -522,22 +522,26 @@ function AdminSettings({ onClose }) {
               <h3>월간 점수 트렌드</h3>
               <div className="trend-chart">
                 <div className="chart-bars">
-                  {[
-                    { week: '1주차', score: 72 },
-                    { week: '2주차', score: 75 },
-                    { week: '3주차', score: 78 },
-                    { week: '4주차', score: 82 }
-                  ].map((data, idx) => (
-                    <div key={idx} className="chart-column">
-                      <div 
-                        className={`chart-bar ${idx === 3 ? 'current' : ''}`}
-                        style={{ height: `${(data.score / 100) * 100}%` }}
-                      >
-                        <span className="bar-value">{data.score}</span>
+                  {(() => {
+                    const chartData = [
+                      { week: '1주차', score: 72 },
+                      { week: '2주차', score: 75 },
+                      { week: '3주차', score: 78 },
+                      { week: '4주차', score: 82 }
+                    ];
+                    const chartHeightPx = 300; // matches .chart-bars / .chart-axis height in CSS
+                    return chartData.map((data, idx) => (
+                      <div key={idx} className="chart-column">
+                        <div 
+                          className={`chart-bar ${idx === 3 ? 'current' : ''}`}
+                          style={{ height: `${Math.max((data.score / 100) * chartHeightPx, 6)}px` }}
+                        >
+                          <span className="bar-value">{data.score}</span>
+                        </div>
+                        <span className="chart-label">{data.week}</span>
                       </div>
-                      <span className="chart-label">{data.week}</span>
-                    </div>
-                  ))}
+                    ));
+                  })()}
                 </div>
                 <div className="chart-axis">
                   <div className="axis-mark">100점</div>
