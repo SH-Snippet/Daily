@@ -880,7 +880,7 @@ function AdminSettings({ onClose }) {
         {activeTab === 'orgRankings' && (
           <div className="org-rankings-settings">
             <h2>조직 단위별 순위</h2>
-            <p className="description">기업, 학교, 부서 단위의 전체 순위와 리포트</p>
+            <p className="description">기업 및 부서 단위의 전체 순위와 리포트</p>
 
             <div className="ranking-type-selector">
               <button 
@@ -889,12 +889,7 @@ function AdminSettings({ onClose }) {
               >
                 기업별
               </button>
-              <button 
-                className={`type-btn ${orgRankings.type === 'school' ? 'active' : ''}`}
-                onClick={() => setOrgRankings(prev => ({ ...prev, type: 'school' }))}
-              >
-                학교별
-              </button>
+              {/* 학교별 항목 제거: 조직 순위는 기업/부서 단위만 제공 */}
               <button 
                 className={`type-btn ${orgRankings.type === 'department' ? 'active' : ''}`}
                 onClick={() => setOrgRankings(prev => ({ ...prev, type: 'department' }))}
